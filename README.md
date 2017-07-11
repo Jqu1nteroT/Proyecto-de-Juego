@@ -23,4 +23,4 @@ Como segunda fase este proyecto, nos aventuraremos en el desarrollo de un juego 
 
 Para la tercera fase, nos aventuraremos en la publicacion de nuestro juego (**Fase 2**) en las potenciales plataformas moviles. Comenzando por **Android** directamente desde la **PlayStore**.
 
-## Fuentes:
+## Fuentes: 
