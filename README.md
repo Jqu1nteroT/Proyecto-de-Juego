@@ -2,7 +2,7 @@
 
 Primer ensayo de un juego para dispositivos moviles, basado en el framework phaser. Este proyecto esta siendo desarrollado de manera totalmente autonoma, sin fines de lucro y de manera autodidacta. Todas las fuentes utilizadas en el mismo seran citadas al final de este documento. 
 
-## Objetio:
+## Objetivo:
 
 Como objetivo principal tenemos el desarrollo de videojuegos tanto para plataformas moviles como navegadores webm basados en la libreria **Phaser** de codigo abierto, entre otras herramientas de acceso gratuito.
 
