@@ -1,6 +1,6 @@
 # Proyecto de Juego
 
-Primer ensayo de un juego para dispositivos moviles, basado en el framework phaser. 
+Primer ensayo de un juego para dispositivos moviles, basado en el framework phaser. Este proyecto esta siendo desarrollado de manera totalmente autonoma, sin fines de lucro y de manera autodidacta. Todas las fuentes utilizadas en el mismo seran citadas al final de este documento. 
 
 ## Objetio:
 
@@ -22,3 +22,5 @@ Como segunda fase este proyecto, nos aventuraremos en el desarrollo de un juego 
 ### Fase 3:
 
 Para la tercera fase, nos aventuraremos en la publicacion de nuestro juego (**Fase 2**) en las potenciales plataformas moviles. Comenzando por **Android** directamente desde la **PlayStore**.
+
+## Fuentes:
