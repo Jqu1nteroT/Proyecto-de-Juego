@@ -25,6 +25,18 @@ Para la tercera fase, nos aventuraremos en la publicacion de nuestro juego (**Fa
 
 ## Fuentes: 
 
-- Imagenes para la replica de **Flappy Bird** cortesia de:
+- Libreria basada en JavaScript para el desarrollo de videojuegos cortesia de **Phaser**:
+
+https://phaser.io/
+
+- Tutorial guia para la creacion de las replicas de **Flappy Bird** y **Space Invaders**, cortesia de **Nicolas Rojas** en su canal de **YouTube**:
+
+https://www.youtube.com/channel/UCbnQK2ep8goFvrrvBMy0Z6Q
+
+- Sprites para la replica de **Flappy Bird** cortesia de:
 
 http://flappycreator.com/index.php
+
+- Sprites para la replica de **Space Invaders** cortesia de Google imagenes:
+
+https://www.google.com
