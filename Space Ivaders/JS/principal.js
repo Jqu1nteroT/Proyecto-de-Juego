@@ -85,6 +85,8 @@ var estadoPrincipal = {
 	},
 	//generando animaciones
 	update: function () {
+		//Animacion del escenario
+		fondoJuego.tilePosition.y += 1;
 		//Verificamos la funcion de los botones
 		if(cursores.right.isDown){
 			nave.position.x += 3;
