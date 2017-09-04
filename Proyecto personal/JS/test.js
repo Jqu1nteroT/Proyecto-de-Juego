@@ -1,12 +1,12 @@
 
 var fondoJuego;
-var pisoGrande;
-var pisoMedio;
-var pisoPeque;
+var lava;
+var piso;
 var runner;
+var cursores;
 
 //Condiciones para iniciar la construccion del juego
-var juego = new Phaser.Game(500, 300, Phaser.CANVAS, 'bloque_juego');
+var juego = new Phaser.Game(600, 400, Phaser.CANVAS, 'bloque_juego');
 
 var estadoPrincipal = {
 	//Recursos a cargar
@@ -14,47 +14,50 @@ var estadoPrincipal = {
 		//cargando el escenario
 		juego.load.image('fondo', "sprites/hoja_arrugada_by_dianabtr27-d5zlixb.jpg");
 		//cargando piso para el corredor
-		juego.load.image('pisoGrande', "sprites/pisoGrande.png");
-		juego.load.image('pisoPeque', "sprites/pisoPeque.png");
-		juego.load.image('pisoMedio', "sprites/pisoMedio.png");
+		juego.load.image('lava1', "sprites/lava.svg");
+		//obstaculo
+		juego.load.image('obstaculo',"sprites/obstaculo.svg");
 		//cargando al personaje
-		juego.load.spritesheet('corredor', "sprites/runer2.svg", 68, 168);
+		juego.load.spritesheet('corredor', "sprites/NinjaRun2.svg", 53.03, 91.43);
 		//esta linea permite que el juego corra mas fluido
 		juego.forceSingleUdate = true;
 	},
 	//Mostrando los recursos cagados anteriormente
 	create: function () {
+		cursores = juego.input.keyboard.createCursorKeys();
 		//mostrando el escenario
-		fondoJuego = juego.add.tileSprite(0, 0, 500, 300, 'fondo');
-		//mostramos el piso
-		pisoGrande = juego.add.tileSprite(0, 270, 405, 36, 'pisoGrande');
-		//redimencionando los obstaculos
-			pisoGrande.anchor.setTo(0, 0);
-			pisoGrande.scale.setTo(1, 0.7);
-			pisoGrande.enableBlody = true;
-			pisoGrande.physicsBodyType = Phaser.Physics.ARCADE;
-			juego.physics.arcade.enable(pisoGrande);
-		pisoMedio = juego.add.tileSprite(0, 170, 206, 37, 'pisoMedio');
-		//redimencionando los obstaculos
-			pisoMedio.anchor.setTo(0, 0);
-			pisoMedio.scale.setTo(1, 0.7);
-			pisoMedio.enableBlody = true;
-		pisoPeque = juego.add.tileSprite(0, 70, 99, 35, 'pisoPeque');
-		//redimencionando los obstaculos
-			pisoPeque.anchor.setTo(0, 0);
-			pisoPeque.scale.setTo(1, 0.7);
-			pisoPeque.enableBlody = true;
-		//mostrando el corredor
-		//juego.add.sprite(juego.width/2 -100, juego.height/2, 'corredor');
-		runner = juego.add.sprite(100, 120, 'corredor');
-			runner.scale.setTo(0.4, 0.4);
-			runner.frame = 0;
-			runner.animations.add('corre', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], 10, true);
-			//generamos las fisicas del juego
-			juego.physics.startSystem(Phaser.Physics.ARCADE);
+		fondoJuego = juego.add.tileSprite(0, 0, 800, 500, 'fondo');
+		//mostrando el obstaculo
+		piso = juego.add.tileSprite(100,220,200,70,'obstaculo');
+			piso.scale.setTo(1,0.6);
+			//piso.enableBody = true;
+			//piso.physicsBodyType = Phaser.Physics.ARCADE;
+			juego.physics.enable(piso, Phaser.Physics.ARCADE);
+			piso.body.collideWorldBounds = true;
+			piso.body.immovable = true;
+			piso.body.setSize(200, 70);
+		//mostrando la lava
+		lava = juego.add.tileSprite(0,310,800,150,'lava1');
+			lava.scale.setTo(1,0.6);
+			/*juego.physics.enable(lava, Phaser.Physics.ARCADE);
+			lava.body.collideWorldBounds = true;
+			lava.body.immovable = true;*/
+			/*lava.enableBody = true;
+			lava.physicsBodyType = Phaser.Physics.ARCADE;*/
+		//mostrando al corredor
+		runner = juego.add.sprite(100, 350, 'corredor');
+			runner.scale.setTo(1, 1);
+			/*runner.enableBody = true;
+			runner.physicsBodyType = Phaser.Physics.ARCADE;*/
+			runner.frame = 3;
+			runner.animations.add('correR', [4,5,6], 15, true);
+			runner.animations.add('correL', [0,1,2], 15, true);
 			//activamos las mecanicas arcade sobre el personaje
-			juego.physics.arcade.enable(runner);
+			juego.physics.enable(runner, Phaser.Physics.ARCADE);
 			runner.body.collideWorldBounds = true;
+			runner.body.checkCollision = true;
+			runner.anchor.setTo(15,1);
+			runner.body.setSize(10, 80, 23, 11);
 			//agrgamos gravedad al peronaje
 			runner.body.gravity.y = 1200;
 			salto = juego.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -63,9 +66,24 @@ var estadoPrincipal = {
 	},
 	//generando animaciones
 	update: function () {
-		//Animacion del escenario
-		fondoJuego.tilePosition.x -= 1;
-		runner.animations.play('corre');
+		
+		//controles basicos del personaje
+		if (cursores.right.isDown) {
+			runner.position.x += 3;
+			runner.animations.play('correR');
+			//Animacion del escenario
+			fondoJuego.tilePosition.x -= 1;
+			lava.tilePosition.x -= 3;
+		}else if (cursores.left.isDown) {
+			runner.position.x -= 3;
+			runner.animations.play('correL');
+			//Animacion del escenario
+			fondoJuego.tilePosition.x -= 1;
+			lava.tilePosition.x -= 3;
+		}else {
+			runner.frame = 3;
+		}
+		juego.physics.arcade.collide(runner, piso);
 	},
 	//agregamos la funcion saltar
 	saltar: function () {
@@ -74,6 +92,15 @@ var estadoPrincipal = {
 		//agregamos una transicion en el angulo cuando vuela
 		juego.add.tween(runner).to(100, 100).start();
 	},
+	
+	render: function () {
+
+	juego.debug.bodyInfo(runner, 16, 24);
+	juego.debug.body(runner);
+	juego.debug.body(piso);
+	//juego.debug.body(lava);
+
+}
 };
 
 
