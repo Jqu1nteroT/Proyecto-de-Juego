@@ -96,11 +96,18 @@ var estadoPrincipal = {
 	render: function () {
 
 	juego.debug.bodyInfo(runner, 16, 24);
-	juego.debug.body(runner);
+	//juego.debug.body(runner);
 	juego.debug.body(piso);
 	//juego.debug.body(lava);
+	},
 
-}
+	init: function() {
+		juego.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
+		juego.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+		juego.scale.pageAlignVertically = true;
+		juego.scale.pageAlignHorizontally = true;
+		console.log('entra');
+	},
 };
 
 
